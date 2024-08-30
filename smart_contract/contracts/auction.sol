@@ -23,7 +23,7 @@ contract Auction {
         address highest_bidder;
     }
 
-    auction_structure[] live_auctions;
+    auction_structure[] public live_auctions;
 
     function auction_init(uint256 code, address auction_admin, uint256 duration, string memory title, uint256 minimum_price) public {
         uint256 start_time = block.timestamp;
@@ -60,4 +60,5 @@ contract Auction {
         }
         require(auctionFound, "Auction not found");
     }
+
 }

@@ -43,8 +43,6 @@ contract Auction {
             highest_bidder: address(0),
             image: image
         }));
-        
-
         emit auctionCreated(code, title, minimum_price, duration);
     }
 

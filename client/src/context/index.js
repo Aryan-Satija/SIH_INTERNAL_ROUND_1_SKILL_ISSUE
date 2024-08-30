@@ -1,14 +1,21 @@
 import React, {createContext, useContext, useState} from 'react';
 import {ethers} from 'ethers'; // ethers library is used to interact with the ethereum blockchains
 import { toast } from 'react-toastify';
-import { contractAddress, contractAbi } from '../constants'; // address of a smart contract on the Ethereum blockchain and the Application Binary Interface (ABI) for that contract
+import { contractAddress, contractAbi, auctionContractAddress, auctionContractAbi } from '../constants'; // address of a smart contract on the Ethereum blockchain and the Application Binary Interface (ABI) for that contract
 const myContext = createContext();
 const { ethereum } = window; // The ethereum object is destructured from the window global object. 
 const createContract = async()=>{
     const provider = new ethers.BrowserProvider(ethereum);
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+    
     return contract;
+}
+const createAuctionContract = async()=>{
+    const provider = new ethers.BrowserProvider(ethereum);
+    const signer = await provider.getSigner();
+    const auctioncontract = new ethers.Contract(auctionContractAddress, auctionContractAbi, signer);
+    return auctioncontract;
 }
 
 export const MyProvider = ({children})=>{
@@ -141,12 +148,63 @@ export const MyProvider = ({children})=>{
             console.log(err);
         }
     }
+
+    const createAuction = async(code, auction_admin, duration, title, description, image, minimum_price)=>{
+        try{
+            if(!ethereum){
+                toast('Please Install Metamask!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                return;
+            }
+            const contract = await createAuctionContract();
+            await contract.auction_init(code, auction_admin, duration, title, description, image, minimum_price)
+            return true;
+        } catch(err){
+            console.log(err);
+            return false;
+        }
+    }
+
+    const bidAuction = async(code)=>{
+        try{
+            if(!ethereum){
+                toast('Please Install Metamask!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                return;
+            }
+            const contract = await createAuctionContract();
+            await contract.auction_bid(code);
+            return true;
+        } catch(err){
+            console.log(err);
+            return false;
+        }
+    }
+
     return (<myContext.Provider value={{
         currentAccount,
         connectToWallet,
         requestToConnectWallet,
         validateDoc,
-        addPdfHash
+        addPdfHash,
+        createAuction,
+        bidAuction
     }}>
     {
         children

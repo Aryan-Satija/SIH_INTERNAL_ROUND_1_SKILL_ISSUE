@@ -11,7 +11,7 @@ function App() {
               <Route exact path="/validate" element={<PrivateRoute><Validate/></PrivateRoute>}/>
               <Route exact path="/create" element={<PrivateRoute><Create/></PrivateRoute>}/>
               <Route exact path="/" element={<Home/>}/>
-              <Route exact path="/aution" element={<Auction/>}/>
+              <Route exact path="/auction" element={<Auction/>}/>
               <Route exact path="/about" element={<About/>}/>
               <Route exact path="/contact" element={<ContactUs/>}/>
               <Route exact path="/profile" element={<Profile/>}/>

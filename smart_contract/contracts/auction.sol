@@ -60,5 +60,4 @@ contract Auction {
         }
         require(auctionFound, "Auction not found");
     }
-
 }

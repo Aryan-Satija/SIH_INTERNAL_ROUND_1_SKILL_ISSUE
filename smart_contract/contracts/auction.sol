@@ -18,14 +18,16 @@ contract Auction {
         uint256 start_time;
         uint256 end_time;
         string title;
+        string description;
         uint256 minimum_price;
         uint256 current_price;
         address highest_bidder;
+        string image;
     }
 
     auction_structure[] public live_auctions;
 
-    function auction_init(uint256 code, address auction_admin, uint256 duration, string memory title, uint256 minimum_price) public {
+    function auction_init(uint256 code, address auction_admin, uint256 duration, string memory title, string memory description, uint256 minimum_price) public {
         uint256 start_time = block.timestamp;
         uint256 end_time = start_time + duration;
 
@@ -35,6 +37,7 @@ contract Auction {
             start_time: start_time,
             end_time: end_time,
             title: title,
+            description: description,
             minimum_price: minimum_price,
             current_price: 0,
             highest_bidder: address(0)

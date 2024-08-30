@@ -1,9 +1,4 @@
-import React, {useRef, useState} from 'react';
-import {apiConnector} from '../services/apiConnector';
-import { DOCUMENT_APIS } from '../services/document_apis';
-import { PDF_APIS } from '../services/pdf_apis';
-import {useSelector} from 'react-redux';
-import { GetGlobalProps } from '../context';
+import React from 'react';
 import { SideDrawer } from '../components/drawer';
 import { ValidateTable } from '../components/validateTable';
 

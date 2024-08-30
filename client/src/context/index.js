@@ -223,14 +223,14 @@ export const MyProvider = ({children})=>{
             const auctions = await contract.getAuctions();
 
             const formattedAuctions = auctions.map(auction => ({
-                code: auction.code.toNumber(), 
+                code: Number(auction.code),
                 admin: auction.admin,
-                start_time: new Date(auction.start_time.toNumber() * 1000).toLocaleString(), 
-                end_time: new Date(auction.end_time.toNumber() * 1000).toLocaleString(),
+                start_time: new Date(Number(auction.start_time) * 1000).toLocaleString(), 
+                end_time: new Date(Number(auction.end_time) * 1000).toLocaleString(), 
                 title: auction.title,
                 description: auction.description,
-                minimum_price: auction.minimum_price.toNumber(),
-                current_price: auction.current_price.toNumber(),
+                minimum_price: auction.minimum_price.toString(),
+                current_price: auction.current_price.toString(), 
                 highest_bidder: auction.highest_bidder,
                 image: auction.image
             }));
@@ -259,7 +259,8 @@ export const MyProvider = ({children})=>{
         validateDoc,
         addPdfHash,
         createAuction,
-        bidAuction
+        bidAuction,
+        getAuctions
     }}>
     {
         children

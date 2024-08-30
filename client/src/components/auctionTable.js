@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {
     Table,
     Thead,
@@ -9,7 +9,26 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Text,
+    Input,
+    FormControl,
+    FormLabel,
+    Textarea,
+    NumberInput,
+    NumberInputField,
+    Box,
+    Button,
+    useDisclosure
 } from '@chakra-ui/react';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton
+} from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 
 const auctionBid = [
@@ -66,50 +85,147 @@ const auctionBid = [
 
 const AuctionTable = () => {
     const navigate = useNavigate();
-  return (
-    <div>
-        <TableContainer>
-            <Table className='text-slate-500'>
-                <TableCaption>Recent Auctions</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>title</Th>
-                        <Th>start_time</Th>
-                        <Th>admin</Th>
-                        <Th>highest bid</Th>
-                        <Th>Visit</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {
-                        auctionBid.map((auction)=>{
-                            return (<Tr>
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const finalRef = React.useRef(null);
+
+    const [auctionData, setAuctionData] = useState({
+        code: '',
+        title: '',
+        description: '',
+        basePrice: 0,
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAuctionData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleNumberChange = (value) => {
+        setAuctionData((prevData) => ({
+            ...prevData,
+            basePrice: value,
+        }));
+    };
+
+    const handleSubmit = () => {
+        // Handle the form submission logic
+        console.log(auctionData);
+        onClose();
+    };
+
+    return (
+        <div>
+            <TableContainer>
+                <Table className='text-slate-500'>
+                    <TableCaption>
+                        <Text>Recent Auctions</Text>
+                        <>
+                            <Box ref={finalRef} tabIndex={-1} aria-label='Focus moved to this box'>
+                                Some other content that'll receive focus on close.
+                            </Box>
+
+                            <Button mt={4} onClick={onOpen} bg='green.500'>
+                                Create Auction
+                            </Button>
+                            <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <ModalHeader>Create Auction</ModalHeader>
+                                    <ModalCloseButton />
+                                    <ModalBody>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Auction Code</FormLabel>
+                                            <Input
+                                                name="code"
+                                                value={auctionData.code}
+                                                onChange={handleChange}
+                                                placeholder="Enter auction code"
+                                            />
+                                        </FormControl>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Title</FormLabel>
+                                            <Input
+                                                name="title"
+                                                value={auctionData.title}
+                                                onChange={handleChange}
+                                                placeholder="Enter auction title"
+                                            />
+                                        </FormControl>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Description</FormLabel>
+                                            <Textarea
+                                                name="description"
+                                                value={auctionData.description}
+                                                onChange={handleChange}
+                                                placeholder="Enter auction description"
+                                            />
+                                        </FormControl>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Base Price</FormLabel>
+                                            <NumberInput
+                                                value={auctionData.basePrice}
+                                                onChange={handleNumberChange}
+                                                min={0}
+                                            >
+                                                <NumberInputField name="basePrice" placeholder="Enter base price" />
+                                            </NumberInput>
+                                        </FormControl>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button colorScheme='green' mr={3} onClick={handleSubmit}>
+                                            Create
+                                        </Button>
+                                        <Button variant='ghost' onClick={onClose}>Close</Button>
+                                    </ModalFooter>
+                                </ModalContent>
+                            </Modal>
+                        </>
+                    </TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th>Title</Th>
+                            <Th>Start Time</Th>
+                            <Th>Admin</Th>
+                            <Th>Highest Bid</Th>
+                            <Th>Visit</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {auctionBid.map((auction) => (
+                            <Tr key={auction.code}>
                                 <Td>{auction.title}</Td>
                                 <Td>{auction.start_time}</Td>
                                 <Td>{auction.admin}</Td>
                                 <Td>{auction.current_price}</Td>
                                 <Td>
-                                    <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={()=>{
-                                        navigate(`/auction/${auction.code}`)
-                                    }}>Visit</button>
+                                    <Button
+                                        onClick={() => {
+                                            navigate(`/auction/${auction.code}`);
+                                        }}
+                                        bg='green.500'
+                                    >
+                                        Visit
+                                    </Button>
                                 </Td>
-                            </Tr>)
-                        })  
-                    }
+                            </Tr>
+                        ))}
                     </Tbody>
                     <Tfoot>
                         <Tr>
-                            <Th>title</Th>
-                            <Th>start_time</Th>
-                            <Th>admin</Th>
-                            <Th>highest bid</Th>
+                            <Th>Title</Th>
+                            <Th>Start Time</Th>
+                            <Th>Admin</Th>
+                            <Th>Highest Bid</Th>
                             <Th>Visit</Th>
                         </Tr>
                     </Tfoot>
-            </Table>
+                </Table>
             </TableContainer>
-    </div>
-  )
-}
+        </div>
+    );
+};
 
-export default AuctionTable
+export default AuctionTable;

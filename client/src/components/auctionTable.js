@@ -10,6 +10,7 @@ import {
     TableCaption,
     TableContainer,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const auctionBid = [
     {
@@ -64,6 +65,7 @@ const auctionBid = [
 
 
 const AuctionTable = () => {
+    const navigate = useNavigate();
   return (
     <div>
         <TableContainer>
@@ -80,14 +82,16 @@ const AuctionTable = () => {
                 </Thead>
                 <Tbody>
                     {
-                        auctionBid.map((bid)=>{
+                        auctionBid.map((auction)=>{
                             return (<Tr>
-                                <Td>{bid.title}</Td>
-                                <Td>{bid.start_time}</Td>
-                                <Td>{bid.admin}</Td>
-                                <Td>{bid.current_price}</Td>
+                                <Td>{auction.title}</Td>
+                                <Td>{auction.start_time}</Td>
+                                <Td>{auction.admin}</Td>
+                                <Td>{auction.current_price}</Td>
                                 <Td>
-                                    <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Visit</button>
+                                    <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' onClick={()=>{
+                                        navigate(`/auction/${auction.code}`)
+                                    }}>Visit</button>
                                 </Td>
                             </Tr>)
                         })  

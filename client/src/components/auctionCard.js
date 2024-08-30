@@ -10,16 +10,17 @@ const AuctionCard = ({auction}) => {
                 />
                 <Stack mt='6' spacing='3'>
                     <Heading size='xl' className='capitalize text-slate-400'>{auction.title}</Heading>
+                    <Text className='text-yellow-800 font-bold'>By {auction.admin}</Text>
                     <Text className='text-slate-600'>
                         {
                             auction.description
                         }
                     </Text>
-                    <Text color='green.600' fontSize='xl' className='font-bold'>
-                        Base Price: ₹ {auction.minimum_price}
+                    <Text color='whiteAlpha.700' fontSize='xl' className='font-bold'>
+                        Base Price: {auction.minimum_price} eth
                     </Text>
-                    <Text color='green.600' fontSize='xl' className='font-bold'>
-                        Current Price: ₹ {auction.current_price}
+                    <Text color='whiteAlpha.700' fontSize='xl' className='font-bold'>
+                        Current Price: {auction.current_price} eth 
                     </Text>
                 </Stack>
             </CardBody>

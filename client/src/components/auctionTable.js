@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Table,
     Thead,
@@ -33,7 +33,10 @@ import { useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {pinFileToIPFS} from '../utils/ipfsUploadHandler';
-
+import { GetGlobalProps } from '../context';
+import {apiConnector} from '../services/apiConnector.js';
+import { useSelector } from 'react-redux';
+import { PROFILE_APIS } from '../services/profile_apis';
 const auctionBid = [
     {
         code: "5c7uu8",
@@ -90,16 +93,18 @@ const AuctionTable = () => {
     const navigate = useNavigate();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const finalRef = React.useRef(null);
+    const {createAuction} = GetGlobalProps();
 
     const [auctionData, setAuctionData] = useState({
         code: '',
         title: '',
         description: '',
         basePrice: 0,
+        duration: 0
     });
+
     const [image, setImage] =  useState(null);
-    const [ipfsUrl, setIpfsUrl] = useState('');
-    console.log(ipfsUrl);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAuctionData((prevData) => ({
@@ -115,21 +120,33 @@ const AuctionTable = () => {
         }));
     };
 
+    const handleDurationChange = (value) => {
+        setAuctionData((prevData) => ({
+            ...prevData,
+            duration: value,
+        }));
+    };
+
     const handleFileChange = (e) => {
         setImage(e.target.files[0]);
     };
+    
 
     const handleSubmit = async() => {
         
-        console.log(auctionData);
+        const ipfsUrl = await uploadHandler();
+        
+        console.log(ipfsUrl);
 
-        if (!auctionData.code || !auctionData.title || !auctionData.description || !auctionData.basePrice || !image) {
+        
+        if (!auctionData.code || !auctionData.title || !auctionData.description || !auctionData.basePrice || !auctionData.duration || !ipfsUrl || !image) {
             alert("Please fill in all fields.");
             return;
         }
 
-        await uploadHandler();
-      
+        const id = toast.loading("Creating Auction");
+        await createAuction(auctionData.code, auctionData.duration, auctionData.title, auctionData.description, ipfsUrl, auctionData.basePrice);
+        toast.update(id, {render: 'Auction Created', type: 'success', isLoading: false, autoClose: 5000})
     };
     const uploadHandler = async()=>{
         if(image){
@@ -144,7 +161,7 @@ const AuctionTable = () => {
 
                 toast.update(id, {render: 'File Uploaded to ipfs...', type: 'success', isLoading: false, autoClose: 5000})
                 
-                setIpfsUrl(data.IpfsHash);
+                return data.IpfsHash;
             } catch(err){
                 console.log(err);
             }
@@ -205,6 +222,16 @@ const AuctionTable = () => {
                                                 min={0}
                                             >
                                                 <NumberInputField name="basePrice" placeholder="Enter base price" />
+                                            </NumberInput>
+                                        </FormControl>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Duration</FormLabel>
+                                            <NumberInput
+                                                value={auctionData.duration}
+                                                onChange={handleDurationChange}
+                                                min={0}
+                                            >
+                                                <NumberInputField name="duration" placeholder="Enter duration of the auction here" />
                                             </NumberInput>
                                         </FormControl>
                                         <FormControl mb={4}>

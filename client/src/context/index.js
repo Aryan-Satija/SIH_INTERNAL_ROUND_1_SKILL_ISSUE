@@ -149,7 +149,7 @@ export const MyProvider = ({children})=>{
         }
     }
 
-    const createAuction = async(code, auction_admin, duration, title, description, image, minimum_price)=>{
+    const createAuction = async(code, duration, title, description, image, minimum_price)=>{
         try{
             if(!ethereum){
                 toast('Please Install Metamask!', {
@@ -165,7 +165,11 @@ export const MyProvider = ({children})=>{
                 return;
             }
             const contract = await createAuctionContract();
-            await contract.auction_init(code, auction_admin, duration, title, description, image, minimum_price)
+            let account = await ethereum.request({
+                method: 'eth_accounts'
+            });
+            account = account[0];
+            await contract.auction_init(code, account, duration, title, description, image, minimum_price)
             return true;
         } catch(err){
             console.log(err);

@@ -1,10 +1,7 @@
 const JWT = process.env.REACT_APP_PINATA_JWT;
 
-console.log(JWT);
-
 export const pinFileToIPFS = async (formData) => {
     try {
-        console.log(JWT);
         const response = await fetch(
             "https://api.pinata.cloud/pinning/pinFileToIPFS",
             {

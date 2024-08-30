@@ -30,6 +30,9 @@ import {
     ModalCloseButton
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {pinFileToIPFS} from '../utils/ipfsUploadHandler';
 
 const auctionBid = [
     {
@@ -94,7 +97,9 @@ const AuctionTable = () => {
         description: '',
         basePrice: 0,
     });
-
+    const [image, setImage] =  useState(null);
+    const [ipfsUrl, setIpfsUrl] = useState('');
+    console.log(ipfsUrl);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAuctionData((prevData) => ({
@@ -110,12 +115,41 @@ const AuctionTable = () => {
         }));
     };
 
-    const handleSubmit = () => {
-        // Handle the form submission logic
-        console.log(auctionData);
-        onClose();
+    const handleFileChange = (e) => {
+        setImage(e.target.files[0]);
     };
 
+    const handleSubmit = async() => {
+        
+        console.log(auctionData);
+
+        if (!auctionData.code || !auctionData.title || !auctionData.description || !auctionData.basePrice || !image) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        await uploadHandler();
+      
+    };
+    const uploadHandler = async()=>{
+        if(image){
+            try{
+                const id = toast.loading("uploading file to ipfs...");
+                
+                const formData = new FormData();
+                
+                formData.append("file", image);
+                
+                const data = await pinFileToIPFS(formData);
+
+                toast.update(id, {render: 'File Uploaded to ipfs...', type: 'success', isLoading: false, autoClose: 5000})
+                
+                setIpfsUrl(data.IpfsHash);
+            } catch(err){
+                console.log(err);
+            }
+        }
+    }
     return (
         <div>
             <TableContainer>
@@ -172,6 +206,31 @@ const AuctionTable = () => {
                                             >
                                                 <NumberInputField name="basePrice" placeholder="Enter base price" />
                                             </NumberInput>
+                                        </FormControl>
+                                        <FormControl mb={4}>
+                                            <FormLabel>Image</FormLabel>
+                                            <Box display="flex" alignItems="center">
+                                                <Button
+                                                    as="label"
+                                                    htmlFor="file-upload"
+                                                    cursor="pointer"
+                                                    bg="green.500"
+                                                    color="white"
+                                                    _hover={{ bg: "green.600" }}
+                                                    mr={2}
+                                                >
+                                                    Choose File
+                                                </Button>
+                                                <Input
+                                                    id="file-upload"
+                                                    type="file"
+                                                    name="image"
+                                                    accept='image/*'
+                                                    onChange={handleFileChange}
+                                                    display="none" 
+                                                />
+                                                <Box>{image?.name || 'No file chosen'}</Box>
+                                            </Box>
                                         </FormControl>
                                     </ModalBody>
                                     <ModalFooter>

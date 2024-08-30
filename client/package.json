@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
     "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
     "ethers": "^6.11.1",
     "framer-motion": "^11.3.28",
     "ipfs-http-client": "^60.0.1",

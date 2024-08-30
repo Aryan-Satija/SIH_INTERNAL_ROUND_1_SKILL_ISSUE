@@ -200,6 +200,57 @@ export const MyProvider = ({children})=>{
             return false;
         }
     }
+    
+    const getAuctions = async () => {
+        try {
+            if (!ethereum) {
+                toast('Please Install MetaMask!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+                return;
+            }
+    
+            const contract = await createAuctionContract();
+            
+
+            const auctions = await contract.getAuctions();
+
+            const formattedAuctions = auctions.map(auction => ({
+                code: auction.code.toNumber(), 
+                admin: auction.admin,
+                start_time: new Date(auction.start_time.toNumber() * 1000).toLocaleString(), 
+                end_time: new Date(auction.end_time.toNumber() * 1000).toLocaleString(),
+                title: auction.title,
+                description: auction.description,
+                minimum_price: auction.minimum_price.toNumber(),
+                current_price: auction.current_price.toNumber(),
+                highest_bidder: auction.highest_bidder,
+                image: auction.image
+            }));
+    
+            return formattedAuctions;
+    
+        } catch (err) {
+            console.log(err);
+            toast.error('Error fetching auctions', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+    };
 
     return (<myContext.Provider value={{
         currentAccount,

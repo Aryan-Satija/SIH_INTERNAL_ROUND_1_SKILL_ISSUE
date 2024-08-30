@@ -46,6 +46,10 @@ contract Auction {
         emit auctionCreated(code, title, minimum_price, duration);
     }
 
+    function getAuctions() public view returns (auction_structure[] memory) {
+        return live_auctions;
+    }
+
     function auction_bid(uint256 code) public payable {
         uint256 tot = live_auctions.length;
         bool auctionFound = false;

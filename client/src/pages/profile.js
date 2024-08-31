@@ -33,6 +33,7 @@ import {
 import { DOCUMENT_APIS } from '../services/document_apis.js';
 import { Link } from 'react-router-dom';
 import {IoStarOutline} from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom';
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const data = {
   labels: labels,
@@ -45,6 +46,7 @@ const data = {
   }]
 };
 export const Profile = () => {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [docs, setDocs] = useState([]);
   const {token} = useSelector(state => state.auth);
@@ -107,10 +109,19 @@ export const Profile = () => {
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='green'>
+                <Button variant='solid' colorScheme='blue' onClick={()=>{
+                  navigate("/auction");
+                }}>
+                  Auction
+                </Button>
+                <Button variant='solid' colorScheme='green' onClick={()=>{
+                  navigate("/create");
+                }}>
                   Create
                 </Button>
-                <Button variant='ghost' colorScheme='green'>
+                <Button variant='ghost' colorScheme='green' onClick={()=>{
+                  navigate("/validate");
+                }}>
                   Validate
                 </Button>
               </ButtonGroup>

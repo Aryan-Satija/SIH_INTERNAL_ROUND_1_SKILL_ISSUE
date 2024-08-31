@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import document from '../assets/about.png';
 export const Signup = () => {
   const [mode, setMode] = useState(0);
-  const [otpGenerated, setOtpGenerated] = useState(false);
+  const [otpGenerated, setOtpGenerated] = useState(true);
   const navigate = useNavigate();
   const changeModeHandler = ()=>{
     setFormData(prev => {
@@ -86,7 +86,7 @@ export const Signup = () => {
     <div className={otpGenerated ? 'h-screen flex flex-col md:flex-row-reverse w-screen' : 'h-screen flex flex-col gap-4 p-4 justify-center md:justify-between items-center md:flex-row w-[100vw]' }>
     {
         otpGenerated ? (<div className='w-full flex flex-col items-center justify-center'>
-        <div className='text-slate-100  text-4xl pb-8'>
+        <div className='text-slate-200 font-bold text-4xl pb-8'>
           OTP HAS BEEN SHARED
         </div>
         <OtpInput
@@ -99,7 +99,7 @@ export const Signup = () => {
             width: '70px',
             aspectRatio: '1/1',
             backgroundColor: 'gray',
-            opacity: '0.5',
+            opacity: '0.8',
             borderRadius: '10px',
             color: 'white'
           }}
@@ -108,7 +108,7 @@ export const Signup = () => {
         <div>
           <button onClick={(event)=>{
               otpValidate(event);
-          }} className="w-full text-center mt-8 bg-sky4800 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 font-special hover:scale-95">SUBMIT</button>
+          }} className="w-full text-center mt-8 bg-sky4800 text-richblack-900 cursor-pointer rounded-[8px] px-[24px] py-[12px] duration-200 font-special hover:scale-95 text-slate-100 font-bold">SUBMIT</button>
         </div>
       </div>) :
       (<>

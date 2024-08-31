@@ -7,8 +7,7 @@ const { ethereum } = window; // The ethereum object is destructured from the win
 const createContract = async()=>{
     const provider = new ethers.BrowserProvider(ethereum);
     const signer = await provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-    
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer); 
     return contract;
 }
 const createAuctionContract = async()=>{
@@ -193,7 +192,9 @@ export const MyProvider = ({children})=>{
                 return;
             }
             const contract = await createAuctionContract();
-            await contract.auction_bid(code, bid);
+            const currentBid = ethers.utils.parseUnits(bid.toString(), 'ether');
+            const tx = await contract.auction_bid(code, currentBid);
+            await tx.wait();
             return true;
         } catch(err){
             console.log(err);

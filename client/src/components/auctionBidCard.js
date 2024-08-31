@@ -5,10 +5,27 @@ import {
     SliderTrack,
     SliderFilledTrack,
     SliderThumb,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { GetGlobalProps } from '../context';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AuctionBidCard = ({auction}) => {
-    const current_price = auction?.current_price;
+    console.log(auction);
+    let current_price = Number(auction?.current_price) ? auction?.current_price : 0;
+    current_price = current_price/1e18;
     const [sliderValue, setSliderValue] = useState(0)
+    const {bidAuction} = GetGlobalProps();
+    const castBid = async()=>{
+        const id = toast.loading("Please Wait...");
+        const bid = current_price + 0.01 + (sliderValue*0.01);
+        const success = await bidAuction(auction.code, bid);
+        if(success){
+            toast.update(id, {render: 'Please Refresh the page....', type: 'success', isLoading: false, autoClose: 5000})
+        }
+        else{
+            toast.update(id, {render: 'Something went wrong...', type: 'error', isLoading: false, autoClose: 5000})
+        }
+    }   
     return (<Card maxW='lg' bg='whiteAlpha.100'>
             <CardBody>
                 <Stack mt='6' spacing='3'>
@@ -40,7 +57,7 @@ const AuctionBidCard = ({auction}) => {
             <Divider />
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='green'>
+                    <Button variant='solid' colorScheme='green' onClick={castBid}>
                         Bid
                     </Button>
                 </ButtonGroup>

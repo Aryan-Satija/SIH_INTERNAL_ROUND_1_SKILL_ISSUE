@@ -192,7 +192,8 @@ export const MyProvider = ({children})=>{
                 return;
             }
             const contract = await createAuctionContract();
-            const currentBid = ethers.utils.parseUnits(bid.toString(), 'ether');
+            const formattedBid = bid.toString().replace(/^0+(?!\.)/, ''); // Remove leading zeros
+            const currentBid = ethers.parseUnits(formattedBid, "ether");
             const tx = await contract.auction_bid(code, currentBid);
             await tx.wait();
             return true;
@@ -219,7 +220,6 @@ export const MyProvider = ({children})=>{
             }
     
             const contract = await createAuctionContract();
-            
 
             const auctions = await contract.getAuctions();
 

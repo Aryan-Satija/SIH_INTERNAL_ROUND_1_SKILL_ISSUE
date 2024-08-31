@@ -20,9 +20,9 @@ export const Navbar = () => {
                 {
                     !token && <Link to="/about" className='flex-1 text-center cursor-pointer  rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>About</Link>
                 }
-                {
+                {/* {
                     !token && <Link to="/contact" className='flex-1 text-center cursor-pointer rounded-md p-2 hover:bg-gray-500/20 hover:backdrop-blur-md duration-500'>Contact Us</Link>
-                }
+                } */}
             </div>
             <div className='flex items-center gap-4 justify-center text-slate-200'>
                 {

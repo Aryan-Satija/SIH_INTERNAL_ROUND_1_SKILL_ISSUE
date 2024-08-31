@@ -5,8 +5,10 @@ const crypto = require('crypto')
 const otpGenerator = require('otp-generator');
 const jwt = require('jsonwebtoken');
 const util = require('util');
-const promisify = util.promisify;
+const mailSender = require('../utils/mailSender.js');
+const otpTemplate = require('../mail/emailVerificationTemplate.js');
 
+const promisify = util.promisify;
 function generateKeyPair() {
     return crypto.generateKeyPairSync('rsa', {
         modulusLength: 2048,
@@ -158,6 +160,12 @@ exports.sendotp = async(req, res)=>{
 
         await OTP.create({email, otp:user_otp});
 
+        await mailSender(
+			email,
+			"Verification Email",
+			otpTemplate(user_otp)
+		);
+        
         return res.status(200).json({
             success: true, 
             message: `otp sent successfully`

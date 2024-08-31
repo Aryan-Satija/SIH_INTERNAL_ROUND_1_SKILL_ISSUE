@@ -177,7 +177,7 @@ export const MyProvider = ({children})=>{
         }
     }
 
-    const bidAuction = async(code)=>{
+    const bidAuction = async(code, bid)=>{
         try{
             if(!ethereum){
                 toast('Please Install Metamask!', {
@@ -193,7 +193,7 @@ export const MyProvider = ({children})=>{
                 return;
             }
             const contract = await createAuctionContract();
-            await contract.auction_bid(code);
+            await contract.auction_bid(code, bid);
             return true;
         } catch(err){
             console.log(err);

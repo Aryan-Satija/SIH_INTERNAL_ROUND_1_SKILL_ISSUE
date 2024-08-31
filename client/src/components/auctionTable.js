@@ -59,7 +59,6 @@ const AuctionTable = () => {
             console.log(auctionList);
             setAuctions(auctionList);
         };
-
         fetchAuctions();
     }, []);
     const handleChange = (e) => {

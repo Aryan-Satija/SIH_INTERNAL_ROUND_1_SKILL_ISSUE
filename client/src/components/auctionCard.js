@@ -1,10 +1,14 @@
 import React from 'react'
 import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 const AuctionCard = ({auction}) => {
+
+    const navigate = useNavigate();
+
   return (<Card maxW='lg' bg='whiteAlpha.100'>
             <CardBody>
                 <Image
-                    src={auction.image}
+                    src={`https://emerald-effective-scorpion-239.mypinata.cloud/ipfs/${auction.image}`}
                     alt={auction.title}
                     borderRadius='lg'
                 />
@@ -30,7 +34,9 @@ const AuctionCard = ({auction}) => {
                     <Button variant='solid' colorScheme='green'>
                         Bid
                     </Button>
-                    <Button variant='ghost' colorScheme='green'>
+                    <Button variant='ghost' colorScheme='green' onClick={()=>{
+                        navigate("/auction");
+                    }}>
                         Back
                     </Button>
                 </ButtonGroup>

@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import document from '../assets/about.png';
 export const Signup = () => {
   const [mode, setMode] = useState(0);
-  const [otpGenerated, setOtpGenerated] = useState(true);
+  const [otpGenerated, setOtpGenerated] = useState(false);
   const navigate = useNavigate();
   const changeModeHandler = ()=>{
     setFormData(prev => {

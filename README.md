@@ -12,7 +12,7 @@
 3. **Aryan Satija** (2022UIT3093) - [@Aryan-Satija](https://github.com/Aryan-Satija)
 4. **Vasu Sharma** (2022UIT3105) - [@vasu3110](https://github.com/vasu3110)
 5. **Mayank Aggarwal** (2022UIT3115) - [@MAYANK240903](https://github.com/MAYANK240903)
-6. **Yashi Pitti** (2022UCA1909) - 
+6. **Yashi Pitti** (2022UCA1909) - [@YashiPi](https://github.com/YashiPi)
 
 ## Project Description
 
@@ -39,8 +39,8 @@
 
 ## Project Links
 
-- **Internal Presentation:** [Internal Presentation](URL TO PPT UPLOADED TO GITHUB)
-- **Final SIH Presentation:** [Final SIH Presentation](URL TO PPT UPLOADED TO GITHUB)
+- **Internal Presentation:** [Github Link](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE/blob/master/files/Internal_PPT_SKILL_ISSUE.pdf) / [Google Drive Link](https://drive.google.com/file/d/1hjQSKYCqZd0-gQTLnJDYgoCwIIB2lYAn/view?usp=sharing)
+- **Final SIH Presentation:** [Github Link](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE/blob/master/files/SIH_PPT_SKILL_ISSUE.pdf) / [Google Drive Link]()
 - **Video Demonstration:** [Watch Video](https://youtu.be/CgXG2iZe654)
 - **Live Deployment:** [View Deployment](https://sih2k24.vercel.app/)
 - **Source Code:** [GitHub Repository](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE)

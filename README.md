@@ -1,16 +1,18 @@
-# DocSecure
-
-**Team Name**: Skill Issue
+# DocSecure (Blockchain Track)
 
 **Project Title**: Developing a Work Order Management DApp for a Government College using Sign Protocol and Avail.
 
+**Team Name**: Skill Issue
+
+**Team Leader** : @DevanshArora312
+
 **Team Members**:
-1. **Devansh Arora** (2022UIT3123) - *Team Leader*
-2. **Vivek Kumar Verma** (2022UIT3085)
-3. **Aryan Satija** (2022UIT3093)
-4. **Vasu Sharma** (2022UIT3105)
-5. **Mayank Aggarwal** (2022UIT3115)
-6. **Yashi Pitti** (2022UCA1909)
+1. **Devansh Arora** (2022UIT3123) -  [@DevanshArora312](https://github.com/DevanshArora312)
+2. **Vivek Kumar Verma** (2022UIT3085) - 
+3. **Aryan Satija** (2022UIT3093) - [@Aryan-Satija](https://github.com/Aryan-Satija)
+4. **Vasu Sharma** (2022UIT3105) - [@vasu3110](https://github.com/vasu3110)
+5. **Mayank Aggarwal** (2022UIT3115) - 
+6. **Yashi Pitti** (2022UCA1909) - 
 
 ## Project Description
 
@@ -34,3 +36,12 @@
 ### 4. User Roles and Permissions
 - **Creators and Validators:** Different roles with specific permissions to ensure secure and controlled document creation and validation.
 - **Role-Based Access Control:** Manages access based on user roles to handle work orders and auction details securely.
+
+## Project Links
+
+- **Internal Presentation:** [Internal Presentation](URL TO PPT UPLOADED TO GITHUB)
+- **Final SIH Presentation:** [Final SIH Presentation](URL TO PPT UPLOADED TO GITHUB)
+- **Video Demonstration:** [Watch Video](UNLISTED YOUTUBE LINK)
+- **Live Deployment:** [View Deployment](DEPLOYED LINK IF ANY)
+- **Source Code:** [GitHub Repository](GITHUB LINK TO THE REPO)
+- **Additional Resources:** [Other Relevant Links](ANY OTHER RELEVANT LINKS)

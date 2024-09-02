@@ -40,7 +40,7 @@
 ## Project Links
 
 - **Internal Presentation:** [Github Link](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE/blob/master/files/Internal_PPT_SKILL_ISSUE.pdf) / [Google Drive Link](https://drive.google.com/file/d/1hjQSKYCqZd0-gQTLnJDYgoCwIIB2lYAn/view?usp=sharing)
-- **Final SIH Presentation:** [Github Link](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE/blob/master/files/SIH_PPT_SKILL_ISSUE.pdf) / [Google Drive Link]()
+- **Final SIH Presentation:** [Github Link](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE/blob/master/files/SIH_PPT_SKILL_ISSUE.pdf) / [Google Drive Link](https://drive.google.com/file/d/132qxD1wGSsnXDFqSdRrOS2dWe5niTNXN/view?usp=drivesdk)
 - **Video Demonstration:** [Watch Video](https://youtu.be/CgXG2iZe654)
 - **Live Deployment:** [View Deployment](https://sih2k24.vercel.app/)
 - **Source Code:** [GitHub Repository](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE)

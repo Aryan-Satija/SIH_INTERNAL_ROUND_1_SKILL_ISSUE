@@ -45,3 +45,37 @@
 - **Live Deployment:** [View Deployment](https://sih2k24.vercel.app/)
 - **Source Code:** [GitHub Repository](https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE)
 - **Additional Resources:** [Google Drive Link for all relevant files(PPTs and Demo Video)](https://drive.google.com/drive/folders/13USuQ87zRhjBgL-39U9z7CAi-F5Wu97-?usp=drive_link)
+
+## Installation Guide
+
+Ensure the following tools are installed on your system before proceeding:
+
+1. **Node.js** (v16 or above) and **npm**
+2. **MetaMask** (for interacting with the blockchain)
+
+---
+
+## Installation Steps
+
+### 1. Clone the Repository
+
+First, clone the **DocSecure** repository:
+
+```bash
+git clone https://github.com/yourusername/docsecure.git
+cd docsecure
+```
+
+### 2. Set Up the Client (React)
+Navigate to the frontend folder and install the dependencies:
+
+```bash
+cd client
+npm install
+```
+
+### 3. Once installation is complete, start the React app:
+```bash
+npm start
+```
+

@@ -62,7 +62,7 @@ Ensure the following tools are installed on your system before proceeding:
 First, clone the **DocSecure** repository:
 
 ```bash
-git clone https://github.com/yourusername/docsecure.git
+git clone https://github.com/Aryan-Satija/SIH_INTERNAL_ROUND_1_SKILL_ISSUE.git
 cd docsecure
 ```
 
